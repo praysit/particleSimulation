@@ -1,7 +1,8 @@
-# Exclude Makefiles (case-insensitive & recursive)
+# Ignore the entire build directory from language stats
+build/** linguist-generated
+
+# Also target any leftover make files anywhere in the repo
+*.make linguist-generated
+*.make.* linguist-generated
 [Mm]akefile* linguist-generated
 *.mk linguist-generated
-
-# Exclude any C files if present
-*.c linguist-generated
-*.h linguist-generated
