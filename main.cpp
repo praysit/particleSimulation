@@ -31,11 +31,12 @@ int main() {
 
     particles.push_back(particle(100.f, 50.f));
     particles.push_back(particle(200.f, 50.f));
-    //particles.push_back(particle(300.f, 50.f));
-    //particles.push_back(particle(400.f, 50.f));
-    //particles.push_back(particle(500.f, 50.f));
-    //particles.push_back(particle(600.f, 50.f));
-    //particles.push_back(particle(700.f, 50.f));
+    particles.push_back(particle(300.f, 50.f));
+    particles.push_back(particle(400.f, 50.f));
+    particles.push_back(particle(500.f, 50.f));
+    particles.push_back(particle(600.f, 50.f));
+    particles.push_back(particle(700.f, 50.f));
+
 
     sf::Clock clock; // create clock
     while (window.isOpen()) {
@@ -78,6 +79,13 @@ int main() {
                 if (std::abs(p.velocity.x) < 2.0f) p.velocity.x = 0.0f;
             }
 
+            // Ceiling Collision
+            if (p.position.y < p.radius) {
+                p.position.y = p.radius;
+                p.velocity.y *= -0.8f;
+                if (std::abs(p.velocity.y) < 2.0f) p.velocity.y = 0.0f;
+            }
+
             // Particle Collision
             for (int j = i + 1; j < particles.size(); j++) {
                 float distanceX = particles[j].position.x - p.position.x;
@@ -89,7 +97,7 @@ int main() {
                     float normalX = distanceX / distance;
                     float normalY = distanceY / distance;
                     
-                    float overlap = 0.5f * (distance - particles[j].radius - particles[i].radius); // Calculate overlap
+                    float overlap = 0.5f * (particles[i].radius + particles[j].radius - distance); // Calculate overlap
 
                     p.position.x -= overlap * normalX; // Adjust positions to resolve overlap
                     p.position.y -= overlap * normalY;
@@ -99,12 +107,15 @@ int main() {
 
                     float dotProduct = (relativeVelocityX * normalX) + (relativeVelocityY * normalY);
 
-                    if (dotProduct > 0) continue; // Prevents particles from sticking together
+                    if (dotProduct < 0) continue; // Prevents particles from sticking together
 
                     float impulseScalar = -dotProduct; // Equal mass for both particles
 
-                    p.velocity.x += impulseScalar * normalX; // Update velocities based on impulse
-                    p.velocity.y += impulseScalar * normalY;
+                    particles[i].velocity.x += impulseScalar * normalX; // Update velocities based on impulse
+                    particles[i].velocity.y += impulseScalar * normalY;
+
+                    particles[j].velocity.x -= impulseScalar * normalX;
+                    particles[j].velocity.y -= impulseScalar * normalY;
                 }
             }
             
