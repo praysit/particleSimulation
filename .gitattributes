@@ -1,3 +1,11 @@
-C linguist-vendored
-TypeScript linguist-vendored
-Makefile linguist-generated
+# Ignore C source and header files
+*.c linguist-vendored
+*.h linguist-vendored
+
+# Ignore TypeScript files
+*.ts linguist-vendored
+*.tsx linguist-vendored
+
+# Ignore Makefiles (including subdirectories)
+[Mm]akefile* linguist-vendored
+*.mk linguist-vendored
