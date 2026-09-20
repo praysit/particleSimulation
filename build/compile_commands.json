@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/prays/Desktop/Folders/particleSimulation/particleSimulation/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/particleSimulation.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\particleSimulation.dir\\main.cpp.obj -c C:\\Users\\prays\\Desktop\\Folders\\particleSimulation\\particleSimulation\\main.cpp",
+  "file": "C:/Users/prays/Desktop/Folders/particleSimulation/particleSimulation/main.cpp",
+  "output": "CMakeFiles/particleSimulation.dir/main.cpp.obj"
+}
+]

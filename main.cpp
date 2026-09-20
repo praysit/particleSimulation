@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <vector>
+#include <optional>
 
 struct particle {
     sf::CircleShape shape;
@@ -41,31 +42,31 @@ int main() {
         sf::Time elapsed = clock.restart();
         const float deltaTime = elapsed.asSeconds(); // amount of time that passed between the last frame and the current one
 
-        while (const std::optional event = window.pollEvent()) {
+        while (const auto event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
-                window.close();
-            }
-        }
+        window.close();
+    }
+}
 
         for (particle &p : particles) {
             constexpr float gravity = 9.81f;
             const float SF = 100.f; // S.F for pixels
 
-            // 1. Update velocity (no scale factor here)
+            // Update velocity
             p.velocity.y += gravity * deltaTime;
 
-            // 2. Update position (apply scale factor here so 1 unit = 100 pixels)
+            // Update position
             p.position.y += p.velocity.y * deltaTime * SF;
             p.position.x += p.velocity.x * deltaTime * SF; // Fixed from velocity.x to position.x
 
-            // Floor Collision (adjusted for radius so it doesn't sink into the floor)
+            // Floor Collision
             if (p.position.y > windowHeight - p.radius) {
                 p.position.y = windowHeight - p.radius;
                 p.velocity.y *= -0.8f;
                 if (std::abs(p.velocity.y) < 2.0f) p.velocity.y = 0.0f;
             }
 
-            // Wall Collisions (adjusted for radius)
+            // Wall Collisions
             if (p.position.x > windowWidth - p.radius) {
                 p.position.x = windowWidth - p.radius;
                 p.velocity.x *= -0.8f;
@@ -75,6 +76,12 @@ int main() {
                 p.velocity.x *= -0.8f;
                 if (std::abs(p.velocity.x) < 2.0f) p.velocity.x = 0.0f;
             }
+
+            // Particle Collision
+
+            
+
+
 
             // Sync shape to math position
             p.shape.setPosition(p.position);
