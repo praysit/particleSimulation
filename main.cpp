@@ -48,10 +48,11 @@ int main() {
     }
 }
 
-        for (particle &p : particles) {
+        for (int i = 0; i < particles.size(); i++) { //particle &p : particles
             constexpr float gravity = 9.81f;
             const float SF = 100.f; // S.F for pixels
 
+            particle &p = particles[i];
             // Update velocity
             p.velocity.y += gravity * deltaTime;
 
@@ -78,7 +79,34 @@ int main() {
             }
 
             // Particle Collision
+            for (int j = i + 1; j < particles.size(); j++) {
+                float distanceX = particles[j].position.x - p.position.x;
+                float distanceY = particles[j].position.y - p.position.y;
+            
+                float distance = sqrt(pow(distanceX, 2) + pow(distanceY, 2));
 
+                if (distance < particles[j].radius + particles[i].radius) {
+                    float normalX = distanceX / distance;
+                    float normalY = distanceY / distance;
+                    
+                    float overlap = 0.5f * (distance - particles[j].radius - particles[i].radius); // Calculate overlap
+
+                    p.position.x -= overlap * normalX; // Adjust positions to resolve overlap
+                    p.position.y -= overlap * normalY;
+
+                    float relativeVelocityX = p.velocity.x - particles[j].velocity.x;
+                    float relativeVelocityY = p.velocity.y - particles[j].velocity.y;
+
+                    float dotProduct = (relativeVelocityX * normalX) + (relativeVelocityY * normalY);
+
+                    if (dotProduct > 0) continue; // Prevents particles from sticking together
+
+                    float impulseScalar = -dotProduct; // Equal mass for both particles
+
+                    p.velocity.x += impulseScalar * normalX; // Update velocities based on impulse
+                    p.velocity.y += impulseScalar * normalY;
+                }
+            }
             
 
 
