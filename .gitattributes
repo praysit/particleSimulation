@@ -1,11 +1,7 @@
-# Ignore C source and header files
-*.c linguist-vendored
-*.h linguist-vendored
+# Exclude Makefiles (case-insensitive & recursive)
+[Mm]akefile* linguist-generated
+*.mk linguist-generated
 
-# Ignore TypeScript files
-*.ts linguist-vendored
-*.tsx linguist-vendored
-
-# Ignore Makefiles (including subdirectories)
-[Mm]akefile* linguist-vendored
-*.mk linguist-vendored
+# Exclude any C files if present
+*.c linguist-generated
+*.h linguist-generated
