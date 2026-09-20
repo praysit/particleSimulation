@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\prays\Desktop\particleSimulation\build\CMakeFiles\31ae51e4826c89567295218eab51e7e5\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{926E7C50-5873-3DFE-96F8-2AA54AD732CE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
