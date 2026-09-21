@@ -21,6 +21,15 @@ struct particle {
     }
 };
 
+struct button {
+    sf::RectangleShape shape;
+    sf::Text text;
+    sf::Font font;
+    sf::Color Colour;
+};
+
+
+
 int main() {
     // init window
     constexpr unsigned int windowWidth = 800; // constexpr means @ compiled, not runtime -> save memory
